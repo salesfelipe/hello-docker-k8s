@@ -1,10 +1,16 @@
 #!/bin/bash
 
-docker build node-app -t hello-world-server
-docker build python-app -t body-mass-calculator
+NODE_IMAGE="hello-world-server"
+PYTHON_IMAGE="body-mass-calculator"
+SERVER_CONTAINER_NAME="server"
 
-docker run -p 80:3000 --rm -d --name server hello-world-server
-docker run -i --rm --name calc body-mass-calculator
+docker build node-app -t $NODE_IMAGE
+docker build python-app -t $PYTHON_IMAGE
 
-docker stop server
+docker run -p 80:3000 --rm -d --name $SERVER_CONTAINER_NAME $NODE_IMAGE
+docker run -i --rm --name calc $PYTHON_IMAGE
 
+docker stop $SERVER_CONTAINER_NAME
+
+docker image rm $NODE_IMAGE
+docker image rm $PYTHON_IMAGE
