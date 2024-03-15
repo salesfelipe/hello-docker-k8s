@@ -1,9 +1,10 @@
 #!/bin/bash
 
+docker build node-app -t hello-world-server
+docker build python-app -t body-mass-calculator
 
-docker build node-app -t server
-docker build python-app -t body-mass
+docker run -p 80:3000 --rm -d --name server hello-world-server
+docker run -i --rm --name calc body-mass-calculator
 
+docker stop server
 
-docker run -p 80:3000 --rm -d server
-docker run -i --rm body-mass
