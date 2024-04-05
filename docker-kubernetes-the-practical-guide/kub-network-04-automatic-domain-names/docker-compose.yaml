@@ -15,6 +15,7 @@ services:
       - "8000:8000"
     environment:
       TASKS_FOLDER: tasks
+      AUTH_SERVICE_SERVICE_HOST: auth
     volumes:
       - type: bind
         source: ./tasks-api/tasks
